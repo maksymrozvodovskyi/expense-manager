@@ -1,7 +1,10 @@
-export default function HomePage() {
+import ExpensePie from "@/components/ExpensePie";
+
+export default function DashboardPage() {
   return (
-    <main className="min-h-screen p-6">
-      <h1 className="text-2xl font-bold mb-6">Expense Manager</h1>
-    </main>
+    <>
+      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+      <ExpensePie />
+    </>
   );
 }
