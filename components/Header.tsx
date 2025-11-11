@@ -1,27 +1,31 @@
 import Link from "next/link";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function Header() {
   return (
-    <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 shadow-sm sticky top-0 z-20">
+    <header className="bg-background/70 backdrop-blur-sm border-b border-border sticky top-0 z-20">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="text-lg font-semibold text-gray-900 tracking-tight hover:text-green-600 transition"
+          className="text-lg font-semibold text-foreground hover:text-primary transition-colors"
         >
           Expense Manager
         </Link>
 
-        <nav className="flex gap-6 text-sm font-medium text-gray-600">
-          <Link href="/" className="hover:text-green-600 transition">
-            Dashboard
-          </Link>
-          <Link href="/add" className="hover:text-green-600 transition">
-            Add Expense
-          </Link>
-          <Link href="/list" className="hover:text-green-600 transition">
-            Expenses List
-          </Link>
-        </nav>
+        <div className="flex items-center gap-5">
+          <nav className="flex gap-6 text-sm font-medium text-muted-foreground">
+            <Link href="/" className="hover:text-primary transition">
+              Dashboard
+            </Link>
+            <Link href="/add" className="hover:text-primary transition">
+              Add Expense
+            </Link>
+            <Link href="/list" className="hover:text-primary transition">
+              Expenses List
+            </Link>
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

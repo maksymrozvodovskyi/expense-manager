@@ -1,27 +1,53 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+
 import { useExpensesStore } from "@/lib/store/useExpensesStore";
-import InputField from "./InputField";
-import SelectField from "./SelectField";
 import { showNotification } from "@/lib/utils/notify";
 
-type FormValues = {
-  amount: number;
-  category: string;
-  description?: string;
-  date: string;
-};
+const formSchema = z.object({
+  amount: z
+    .number({ error: "Enter valid amount" })
+    .min(0.01, "Must be greater than 0"),
+  category: z.string().min(1, "Select category"),
+  description: z.string().optional(),
+  date: z.string().min(1, "Date is required"),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 export default function ExpenseForm() {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<FormValues>();
-
   const addExpense = useExpensesStore((s) => s.addExpense);
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      amount: 0,
+      category: "",
+      description: "",
+      date: "",
+    },
+  });
 
   const onSubmit = (data: FormValues) => {
     addExpense({
@@ -29,63 +55,98 @@ export default function ExpenseForm() {
       amount: Number(data.amount),
       description: data.description || "",
     });
-    reset();
+
     showNotification("Expense added", `${data.category} — $${data.amount}`);
+    form.reset();
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="bg-white/80 border border-gray-200 rounded-2xl shadow-sm p-8 grid gap-6 md:grid-cols-2"
-    >
-      <InputField
-        label="Amount"
-        type="number"
-        placeholder="0.00"
-        register={register("amount", {
-          required: "Enter valid amount",
-          min: { value: 0.01, message: "Must be > 0" },
-          valueAsNumber: true,
-        })}
-        error={errors.amount}
-      />
-
-      <SelectField
-        label="Category"
-        register={register("category", { required: "Select category" })}
-        error={errors.category}
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="bg-card border border-border rounded-2xl shadow-sm p-8 grid gap-6 md:grid-cols-2 transition-colors"
       >
-        <option value="">Select</option>
-        <option>Food</option>
-        <option>Transport</option>
-        <option>Shopping</option>
-        <option>Entertainment</option>
-        <option>Other</option>
-      </SelectField>
+        <FormField
+          control={form.control}
+          name="amount"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Amount</FormLabel>
+              <FormControl>
+                <Input
+                  type="number"
+                  placeholder="0.00"
+                  {...field}
+                  onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <InputField
-        label="Description"
-        placeholder="Optional"
-        register={register("description")}
-        error={errors.description}
-      />
+        <FormField
+          control={form.control}
+          name="category"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Category</FormLabel>
+              <Select onValueChange={field.onChange} value={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select category" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="Food">Food</SelectItem>
+                  <SelectItem value="Transport">Transport</SelectItem>
+                  <SelectItem value="Shopping">Shopping</SelectItem>
+                  <SelectItem value="Entertainment">Entertainment</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <InputField
-        label="Date"
-        type="date"
-        register={register("date", { required: "Date is required" })}
-        error={errors.date}
-      />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Input placeholder="Optional" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <div className="md:col-span-2">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-green-600 text-white font-medium py-3 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-400 focus:ring-offset-1 transition disabled:opacity-60"
-        >
-          {isSubmitting ? "Saving..." : "Add Expense"}
-        </button>
-      </div>
-    </form>
+        <FormField
+          control={form.control}
+          name="date"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Date</FormLabel>
+              <FormControl>
+                <Input type="date" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="md:col-span-2">
+          <Button
+            type="submit"
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition"
+          >
+            Add Expense
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }
