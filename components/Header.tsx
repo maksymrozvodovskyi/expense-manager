@@ -6,19 +6,19 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="text-lg font-semibold text-gray-900 tracking-tight hover:text-green-600 transition-colors"
+          className="text-lg font-semibold text-gray-900 tracking-tight hover:text-green-600 transition"
         >
           Expense Manager
         </Link>
 
         <nav className="flex gap-6 text-sm font-medium text-gray-600">
-          <Link href="/" className="hover:text-green-600 transition-colors">
+          <Link href="/" className="hover:text-green-600 transition">
             Dashboard
           </Link>
-          <Link href="/add" className="hover:text-green-600 transition-colors">
+          <Link href="/add" className="hover:text-green-600 transition">
             Add Expense
           </Link>
-          <Link href="/list" className="hover:text-green-600 transition-colors">
+          <Link href="/list" className="hover:text-green-600 transition">
             Expenses List
           </Link>
         </nav>

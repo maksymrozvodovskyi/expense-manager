@@ -7,13 +7,12 @@ export default function Footer() {
           <span className="font-medium text-gray-700">Expense Manager</span>.
           All rights reserved.
         </p>
-
         <div className="flex gap-4 mt-4 sm:mt-0">
           <a
             href="https://tailwindcss.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-green-600 transition-colors"
+            className="hover:text-green-600 transition"
           >
             TailwindCSS
           </a>
@@ -21,7 +20,7 @@ export default function Footer() {
             href="https://nextjs.org/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-green-600 transition-colors"
+            className="hover:text-green-600 transition"
           >
             Next.js
           </a>
@@ -29,7 +28,7 @@ export default function Footer() {
             href="https://github.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-green-600 transition-colors"
+            className="hover:text-green-600 transition"
           >
             GitHub
           </a>

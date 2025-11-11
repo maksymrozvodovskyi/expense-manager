@@ -34,7 +34,7 @@ export default function ExpenseForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl shadow-sm p-8 grid gap-6 md:grid-cols-2"
+      className="bg-white/80 border border-gray-200 rounded-2xl shadow-sm p-8 grid gap-6 md:grid-cols-2"
     >
       <InputField
         label="Amount"
@@ -79,7 +79,7 @@ export default function ExpenseForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-green-600 text-white font-medium py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-1 transition disabled:opacity-60"
+          className="w-full bg-green-600 text-white font-medium py-3 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-400 focus:ring-offset-1 transition disabled:opacity-60"
         >
           {isSubmitting ? "Saving..." : "Add Expense"}
         </button>
