@@ -14,7 +14,7 @@ export default function ExpensePie() {
 
   if (expenses.length === 0)
     return (
-      <div className="bg-card border border-border rounded-2xl shadow-sm p-8 text-muted-foreground text-center backdrop-blur-sm transition-colors">
+      <div className="p-8 border border-border rounded-2xl bg-card shadow-sm text-center text-muted-foreground backdrop-blur-sm transition-colors">
         No data for chart yet.
       </div>
     );
@@ -75,12 +75,12 @@ export default function ExpensePie() {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="bg-card border border-border rounded-2xl shadow-sm p-8 flex flex-col items-center backdrop-blur-sm transition-colors"
+      className="flex flex-col items-center p-8 border border-border rounded-2xl bg-card shadow-sm backdrop-blur-sm transition-colors"
     >
       <div className="relative w-[280px] h-[280px] sm:w-[340px] sm:h-[340px]">
         <Pie data={data} options={options} />
       </div>
-      <p className="text-xs text-muted-foreground mt-4">
+      <p className="mt-4 text-xs text-muted-foreground">
         Showing total by category
       </p>
     </motion.section>

@@ -10,12 +10,12 @@ export default function HomePage() {
       <div className="max-w-6xl mx-auto mt-12 space-y-10">
         <Hero />
 
-        <section className="grid gap-8 md:grid-cols-2">
-          <div className="bg-card border border-border rounded-2xl shadow-sm p-8 backdrop-blur-sm hover:shadow-md transition-shadow duration-200">
-            <h3 className="text-lg font-semibold text-foreground mb-2 tracking-tight">
+        <section className="grid md:grid-cols-2 gap-8">
+          <div className="p-8 border border-border rounded-2xl bg-card shadow-sm backdrop-blur-sm hover:shadow-md transition-shadow duration-200">
+            <h3 className="text-lg font-semibold tracking-tight text-foreground mb-2">
               Quick Start
             </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               Add a few expenses to see your spending overview by category.
             </p>
             <div className="mt-4">

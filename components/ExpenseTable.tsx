@@ -19,7 +19,7 @@ export default function ExpenseTable() {
   if (expenses.length === 0)
     return (
       <div className="flex justify-center items-center min-h-[60vh]">
-        <p className="bg-card border border-border text-muted-foreground px-6 py-4 rounded-xl shadow-sm backdrop-blur-sm text-center transition-colors">
+        <p className="px-6 py-4 border border-border rounded-xl bg-card shadow-sm text-center text-muted-foreground backdrop-blur-sm transition-colors">
           No expenses yet.
         </p>
       </div>
@@ -27,9 +27,9 @@ export default function ExpenseTable() {
 
   return (
     <section className="flex justify-center items-start mt-12 transition-colors">
-      <div className="bg-card border border-border rounded-2xl shadow-sm p-8 w-full max-w-3xl backdrop-blur-sm">
+      <div className="w-full max-w-3xl p-8 border border-border rounded-2xl bg-card shadow-sm backdrop-blur-sm">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-foreground tracking-tight">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
             Expenses List
           </h2>
           <Button
@@ -42,10 +42,10 @@ export default function ExpenseTable() {
           </Button>
         </div>
 
-        <div className="overflow-hidden rounded-xl border border-border">
+        <div className="overflow-hidden border border-border rounded-xl">
           <Table>
             <TableHeader>
-              <TableRow className="bg-muted/50 border-b border-border">
+              <TableRow className="border-b border-border bg-muted/50">
                 <TableHead>Date</TableHead>
                 <TableHead>Category</TableHead>
                 <TableHead>Description</TableHead>
@@ -73,7 +73,7 @@ export default function ExpenseTable() {
           </Table>
         </div>
 
-        <p className="text-xs text-muted-foreground text-right mt-3">
+        <p className="mt-3 text-xs text-right text-muted-foreground">
           Total items: {expenses.length}
         </p>
       </div>

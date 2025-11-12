@@ -64,7 +64,7 @@ export default function ExpenseForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="bg-card border border-border rounded-2xl shadow-sm p-8 grid gap-6 md:grid-cols-2 transition-colors"
+        className="grid md:grid-cols-2 gap-6 p-8 border border-border rounded-2xl bg-card shadow-sm transition-colors"
       >
         <FormField
           control={form.control}
