@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useExpensesStore } from "@/lib/store/useExpensesStore";
 import InputField from "./InputField";
 import SelectField from "./SelectField";
+import { showNotification } from "@/lib/utils/notify";
 
 type FormValues = {
   amount: number;
@@ -29,6 +30,7 @@ export default function ExpenseForm() {
       description: data.description || "",
     });
     reset();
+    showNotification("Expense added", `${data.category} — $${data.amount}`);
   };
 
   return (
