@@ -32,6 +32,12 @@ export default function Header() {
             >
               Goals
             </Link>
+            <Link
+              href="/analytics"
+              className="transition-colors hover:text-primary"
+            >
+              Analytics
+            </Link>
           </nav>
 
           <ThemeToggle />
