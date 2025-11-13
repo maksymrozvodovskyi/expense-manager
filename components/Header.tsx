@@ -17,13 +17,23 @@ export default function Header() {
             <Link href="/" className="transition-colors hover:text-primary">
               Dashboard
             </Link>
+
             <Link href="/add" className="transition-colors hover:text-primary">
               Add Expense
             </Link>
+
             <Link href="/list" className="transition-colors hover:text-primary">
               Expenses List
             </Link>
+
+            <Link
+              href="/goals"
+              className="transition-colors hover:text-primary"
+            >
+              Goals
+            </Link>
           </nav>
+
           <ThemeToggle />
         </div>
       </div>
