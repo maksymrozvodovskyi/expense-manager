@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="mt-20 border-t border-border bg-background/80 backdrop-blur-sm transition-colors">
-      <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between text-sm text-muted-foreground">
+      <div className="flex flex-col sm:flex-row items-center justify-between max-w-6xl mx-auto px-6 py-8 text-sm text-muted-foreground">
         <p>
           © {new Date().getFullYear()}{" "}
           <span className="font-medium text-foreground">Expense Manager</span>.
@@ -13,7 +13,7 @@ export default function Footer() {
             href="https://tailwindcss.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-primary transition-colors"
+            className="transition-colors hover:text-primary"
           >
             TailwindCSS
           </a>
@@ -21,7 +21,7 @@ export default function Footer() {
             href="https://nextjs.org/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-primary transition-colors"
+            className="transition-colors hover:text-primary"
           >
             Next.js
           </a>
@@ -29,7 +29,7 @@ export default function Footer() {
             href="https://github.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-primary transition-colors"
+            className="transition-colors hover:text-primary"
           >
             GitHub
           </a>

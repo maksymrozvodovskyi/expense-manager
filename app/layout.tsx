@@ -38,7 +38,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          {children}
+          <main className="max-w-5xl mx-auto px-6 mt-12">{children}</main>
           <Footer />
           <ToastContainer
             position="top-right"

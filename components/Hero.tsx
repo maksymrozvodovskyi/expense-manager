@@ -18,16 +18,16 @@ export default function Hero() {
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${gradient} text-white shadow-sm p-10 md:p-16 transition-colors`}
+      className={`relative overflow-hidden p-10 md:p-16 rounded-3xl bg-gradient-to-br ${gradient} text-white shadow-sm transition-colors`}
     >
       <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
 
       <div className="relative max-w-3xl">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 drop-shadow-sm">
+        <h1 className="mb-4 text-4xl md:text-5xl font-bold tracking-tight drop-shadow-sm">
           Track your expenses easily
         </h1>
 
-        <p className="text-base md:text-lg text-white/90 leading-relaxed">
+        <p className="text-base md:text-lg leading-relaxed text-white/90">
           Add your spending, group by category, and visualize your finances
           clearly.
         </p>
