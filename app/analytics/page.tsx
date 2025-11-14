@@ -15,8 +15,14 @@ import {
 
 import { useGoalsStore } from "@/lib/store/usegoalsStore";
 
+const WORKSPACE_COLORS: Record<string, string> = {
+  Personal: "#34d399",
+  Family: "#60a5fa",
+  Office: "#fbbf24",
+};
+
 export default function AnalyticsPage() {
-  const { goals } = useGoalsStore();
+  const goals = useGoalsStore((state) => state.goals);
 
   const allGoals = [...goals.personal, ...goals.family, ...goals.office];
 
@@ -39,9 +45,8 @@ export default function AnalyticsPage() {
     },
   ];
 
-  const colors = ["#34d399", "#60a5fa", "#fbbf24"];
-
   const barData = allGoals.map((g) => ({
+    id: g.id,
     name: g.title,
     progress: Math.min((g.current / g.target) * 100, 100),
   }));
@@ -69,6 +74,7 @@ export default function AnalyticsPage() {
 
       <div className="p-6 border rounded-xl bg-white dark:bg-neutral-900 shadow">
         <h2 className="mb-4 text-xl font-semibold">Progress by Workspace</h2>
+
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie
@@ -79,10 +85,11 @@ export default function AnalyticsPage() {
               outerRadius={90}
               label
             >
-              {workspaceData.map((_, i) => (
-                <Cell key={i} fill={colors[i]} />
+              {workspaceData.map((item) => (
+                <Cell key={item.name} fill={WORKSPACE_COLORS[item.name]} />
               ))}
             </Pie>
+
             <Legend />
             <Tooltip />
           </PieChart>
@@ -91,6 +98,7 @@ export default function AnalyticsPage() {
 
       <div className="p-6 border rounded-xl bg-white dark:bg-neutral-900 shadow">
         <h2 className="mb-4 text-xl font-semibold">Goals Progress</h2>
+
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={barData}>
             <XAxis dataKey="name" />

@@ -27,27 +27,36 @@ export default function GoalModal({
   initial,
   editMode,
 }: Props) {
-  const [title, setTitle] = useState("");
-  const [target, setTarget] = useState("");
-  const [deadline, setDeadline] = useState("");
+  const [goalState, setGoalState] = useState({
+    title: "",
+    target: "",
+    deadline: "",
+  });
 
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
 
     if (isOpen && initial) {
-      setTitle(initial.title);
-      setTarget(String(initial.target));
-      setDeadline(initial.deadline);
+      setGoalState({
+        title: initial.title,
+        target: String(initial.target),
+        deadline: initial.deadline,
+      });
+      return;
     }
 
     if (!isOpen && !initial) {
-      setTitle("");
-      setTarget("");
-      setDeadline("");
+      setGoalState({
+        title: "",
+        target: "",
+        deadline: "",
+      });
     }
   };
 
   const handleSubmit = () => {
+    const { title, target, deadline } = goalState;
+
     if (!title || !target || !deadline) return;
 
     onSubmit({
@@ -63,15 +72,7 @@ export default function GoalModal({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent
-        className="
-          relative
-          flex flex-col
-          gap-4
-          p-6
-          rounded-xl
-        "
-      >
+      <DialogContent className="relative flex flex-col gap-4 p-6 rounded-xl">
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold">
             {editMode ? "Edit Goal" : "Create Goal"}
@@ -80,29 +81,30 @@ export default function GoalModal({
 
         <Input
           placeholder="Goal title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={goalState.title}
+          onChange={(e) =>
+            setGoalState((prev) => ({ ...prev, title: e.target.value }))
+          }
         />
 
         <Input
           placeholder="Target amount"
           type="number"
-          value={target}
-          onChange={(e) => setTarget(e.target.value)}
+          value={goalState.target}
+          onChange={(e) =>
+            setGoalState((prev) => ({ ...prev, target: e.target.value }))
+          }
         />
 
         <Input
           type="date"
-          value={deadline}
-          onChange={(e) => setDeadline(e.target.value)}
+          value={goalState.deadline}
+          onChange={(e) =>
+            setGoalState((prev) => ({ ...prev, deadline: e.target.value }))
+          }
         />
 
-        <Button
-          className="
-            w-full
-          "
-          onClick={handleSubmit}
-        >
+        <Button className="w-full" onClick={handleSubmit}>
           {editMode ? "Save Changes" : "Save"}
         </Button>
       </DialogContent>

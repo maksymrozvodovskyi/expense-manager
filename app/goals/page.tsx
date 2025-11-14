@@ -3,12 +3,19 @@
 import { Button } from "@/components/ui/button";
 import GoalCard from "@/components/GoalCard";
 import GoalModal from "@/components/GoalModal";
-import { useState } from "react";
+import { Activity, useState } from "react";
 import { Goal, useGoalsStore } from "@/lib/store/usegoalsStore";
 
+const WORKSPACES = ["personal", "family", "office"] as const;
+
 export default function GoalsPage() {
-  const { workspace, goals, setWorkspace, addGoal, updateGoal, deleteGoal } =
-    useGoalsStore();
+  const goals = useGoalsStore((state) => state.goals);
+  const workspace = useGoalsStore((state) => state.workspace);
+
+  const setWorkspace = useGoalsStore((state) => state.setWorkspace);
+  const addGoal = useGoalsStore((state) => state.addGoal);
+  const updateGoal = useGoalsStore((state) => state.updateGoal);
+  const deleteGoal = useGoalsStore((state) => state.deleteGoal);
 
   const [open, setOpen] = useState(false);
   const [editingGoal, setEditingGoal] = useState<Goal | null>(null);
@@ -17,7 +24,7 @@ export default function GoalsPage() {
       <h1 className="text-3xl font-bold">Goals — {workspace.toUpperCase()}</h1>
 
       <div className="flex gap-3">
-        {(["personal", "family", "office"] as const).map((ws) => (
+        {WORKSPACES.map((ws) => (
           <Button
             key={ws}
             variant={workspace === ws ? "default" : "outline"}
@@ -42,7 +49,9 @@ export default function GoalsPage() {
         ))}
       </div>
 
-      {open && <GoalModal open={open} setOpen={setOpen} onSubmit={addGoal} />}
+      <Activity mode={open ? "visible" : "hidden"}>
+        <GoalModal open={open} setOpen={setOpen} onSubmit={addGoal} />
+      </Activity>
 
       {editingGoal && (
         <GoalModal
